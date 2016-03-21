@@ -1,0 +1,51 @@
+﻿<h1>{{selectedLeague.name}}</h1>
+
+<div class="col-sm-5 text-center">
+    <table class="table">
+        <tr>
+            <th></th>
+            <th class="text-left">Команда</th>
+            <th>И</th>
+            <th>В</th>
+            <th>Н</th>
+            <th>П</th>
+            <th>ГЗ</th>
+            <th>ГП</th>
+            <th>О</th>
+        </tr>
+        <tr ng-repeat="x in selectedLeague.table">
+            <td>{{x.position}}</td>
+            <td class="text-left">{{x.teamName}}</td>
+            <td>{{x.playedGames}}</td>
+            <td>{{x.wins}}</td>
+            <td>{{x.draws}}</td>
+            <td>{{x.losses}}</td>
+            <td>{{x.goals}}</td>
+            <td>{{x.goalsAgainst}}</td>
+            <td>{{x.points}}</td>
+        </tr>
+    </table>
+</div>
+<div class="col-sm-1 text-center">
+</div>
+<div class="col-sm-5 text-center">
+
+    <h3>Последний тур</h3>
+
+    <table class="table">
+        <tr ng-repeat="x in selectedLeague.lastFixtures">
+            <td class="text-right">{{ x.homeTeamName}} </td>
+            <td>{{x.result.goalsHomeTeam + ' - ' + x.result.goalsAwayTeam}}</td>
+            <td class="text-left">{{x.awayTeamName }}</td>
+        </tr>
+    </table>
+    <h3>Следующий матч</h3>
+    <table class="table">
+        <tr ng-repeat="x in selectedLeague.nextFixtures">
+            <td class="text-right">{{ x.homeTeamName}}</td>
+            <td> - </td>
+            <td class="text-left">{{x.awayTeamName }}</td>
+        </tr>
+    </table>
+</div>
+     

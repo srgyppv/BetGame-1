@@ -254,8 +254,10 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Index.html" />
     <Content Include="Scripts\app\core\app.api.js" />
     <Content Include="Scripts\app\core\app.js" />
+    <Content Include="Scripts\model.js" />
     <Content Include="Scripts\ng\angular-animate.js" />
     <Content Include="Scripts\ng\angular-animate.min.js" />
     <Content Include="Scripts\ng\angular-aria.js" />
@@ -1074,6 +1076,7 @@
     <Content Include="Scripts\utils\modernizr-2.6.2.js" />
     <Content Include="Scripts\utils\respond.js" />
     <Content Include="Scripts\utils\respond.min.js" />
+    <Content Include="table.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1093,6 +1096,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Libraries\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

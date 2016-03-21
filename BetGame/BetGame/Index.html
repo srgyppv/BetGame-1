@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="betApp">
+<head>
+    <title>BetGame</title>
+    <script src="Scripts/Libraries/angular.js"></script>
+    <script src="Scripts/model.js"></script>
+	
+    <link href="Scripts/Libraries/bootstrap.css" rel="stylesheet" />
+    <link href="Scripts/Libraries/bootstrap-theme.css" rel="stylesheet" />
+</head>
+<body>
+<div class="panel panel-default" ng-controller="betCtrl">
+<h1 class="panel-heading">BetGame</h1>
+   
+   <select ng-model="selectedLeague" ng-options="x.name for x in leagues"></select>
+   
+   <div class="panel-body" ng-switch="selectedLeague.name">
+  
+  <div ng-switch-when="Germany" class="row">
+      <ng-include src="'table.html'"></ng-include>
+  </div>  
+
+   <div ng-switch-when="England" class="row">
+       <ng-include src="'table.html'"></ng-include>    
+   </div>
+
+   <div ng-switch-when="Spain" class="row">
+       <ng-include src="'table.html'"></ng-include>     
+   </div>
+
+   <div ng-switch-when="Italy" class="row">
+       <ng-include src="'table.html'"></ng-include>   
+   </div>
+ 
+ 
+     
+     </div>
+   </div>
+</body>
+</html>
