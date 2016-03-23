@@ -31,6 +31,16 @@
    <div ng-switch-when="Italy" class="row">
        <ng-include src="'table.html'"></ng-include>   
    </div>
+       
+       <div>
+       <table class="table">
+         <tr ng-repeat="x in lastFive">
+           <td class="text-right"><a ng-click="teamStat(x._links.homeTeam.href)">{{ x.homeTeamName}}</a></td>
+           <td class="text-center">{{x.result.goalsHomeTeam + ' - ' + x.result.goalsAwayTeam}}</td>
+           <td class="text-left"><a ng-click="teamStat(x._links.awayTeam.href)">{{x.awayTeamName }}</a></td>
+         </tr>
+       </table>
+       </div>
  
  
      

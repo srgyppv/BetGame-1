@@ -13,7 +13,9 @@ app.controller("betCtrl",['$scope', '$http', function ($scope, $http) {
                       {name : "Spain", id: "399", lastFixtures: {}, nextFixtures: {}}, 
                       {name : "Italy", id: "401", lastFixtures: {}, nextFixtures: {}}];
     $scope.selectedLeague = $scope.leagues[0];
-    
+    $scope.lastFive = [];
+   
+    //Вытягиваем все лиги, следующий и предыдущий туры в массив  $scope.leagues
 	    
     for (var i = 0; i < $scope.leagues.length; i++) {
         (function (i) {
@@ -22,11 +24,11 @@ app.controller("betCtrl",['$scope', '$http', function ($scope, $http) {
                               
 	    $http.get($scope.rootUrl + $scope.leagues[i].id + "/leagueTable").then(function (response) {
             
-            $scope.matchday = response.data.matchday;
+	        $scope.leagues[i].matchday = response.data.matchday;
             $scope.leagues[i].table = response.data.standing;
 
-            $scope.lastUrl = $scope.rootUrl + $scope.leagues[i].id + "/fixtures?matchday=" + ($scope.matchday - 1);
-            $scope.nextUrl = $scope.rootUrl + $scope.leagues[i].id + "/fixtures?matchday=" + $scope.matchday;
+            $scope.lastUrl = $scope.rootUrl + $scope.leagues[i].id + "/fixtures?matchday=" + $scope.leagues[i].matchday;
+            $scope.nextUrl = $scope.rootUrl + $scope.leagues[i].id + "/fixtures?matchday=" + ($scope.leagues[i].matchday + 1);
 
            $http.get($scope.lastUrl).then(function (response) {
 	          $scope.leagues[i].lastFixtures = response.data.fixtures;
@@ -39,4 +41,38 @@ app.controller("betCtrl",['$scope', '$http', function ($scope, $http) {
         });
         })(i);
     };
+
+    // Получение последних пяти результатов команды
+    $scope.teamStat = function (url) {
+        var teamUrl = url + "/fixtures";
+            
+        
+        $http.get(teamUrl).then(function (response) {
+
+            var teamFixtures, last,
+                j = 0;
+
+            teamFixtures = response.data.fixtures;
+            for (var i = 0; i < teamFixtures.length; i++) {
+                if (teamFixtures[i].status == "FINISHED") {
+                    last = i;
+                }
+            }
+
+            for (i = last - 4; i<=last; i++){
+                $scope.lastFive[j] = teamFixtures[i];
+                j++;
+            }
+
+        });
+                 
+    };
+
+
 }]);
+
+//Выявленное заподло:
+//- Названия команд на немецком, иногда со странными лишними словами и цифрами
+//- Счет null-null в перенесенных матчах
+//- В запросе по команде типа http://api.football-data.org/v1/teams/8/fixtures возвращаются не только матчи чемпа, но и ЛЧ => по matchday вытягивается не то что надо
+//
