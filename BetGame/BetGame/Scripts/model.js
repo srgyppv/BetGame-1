@@ -27,8 +27,8 @@ app.controller("betCtrl",['$scope', '$http', function ($scope, $http) {
 	        $scope.leagues[i].matchday = response.data.matchday;
             $scope.leagues[i].table = response.data.standing;
 
-            $scope.lastUrl = $scope.rootUrl + $scope.leagues[i].id + "/fixtures?matchday=" + $scope.leagues[i].matchday;
-            $scope.nextUrl = $scope.rootUrl + $scope.leagues[i].id + "/fixtures?matchday=" + ($scope.leagues[i].matchday + 1);
+            $scope.lastUrl = $scope.rootUrl + $scope.leagues[i].id + "/fixtures?matchday=" + ($scope.leagues[i].matchday - 1);
+            $scope.nextUrl = $scope.rootUrl + $scope.leagues[i].id + "/fixtures?matchday=" + $scope.leagues[i].matchday;
 
            $http.get($scope.lastUrl).then(function (response) {
 	          $scope.leagues[i].lastFixtures = response.data.fixtures;
@@ -49,10 +49,17 @@ app.controller("betCtrl",['$scope', '$http', function ($scope, $http) {
         
         $http.get(teamUrl).then(function (response) {
 
+            //Получаем название команды для заголовка
+            $http.get(url).then(function (response) {
+                $scope.teamName = response.data.name;
+            });
+
             var teamFixtures, last,
                 j = 0;
 
             teamFixtures = response.data.fixtures;
+            
+
             for (var i = 0; i < teamFixtures.length; i++) {
                 if (teamFixtures[i].status == "FINISHED") {
                     last = i;

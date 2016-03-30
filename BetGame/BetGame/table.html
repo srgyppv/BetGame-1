@@ -15,7 +15,7 @@
         </tr>
         <tr ng-repeat="x in selectedLeague.table">
             <td>{{x.position}}</td>
-            <td class="text-left"><a ng-click="teamStat(x._links.team.href)">{{x.teamName}}</a></td>
+            <td class="text-left"><a ng-click="teamStat(x._links.team.href)" data-toggle="modal" href="#lastFive">{{x.teamName}}</a></td>
             <td>{{x.playedGames}}</td>
             <td>{{x.wins}}</td>
             <td>{{x.draws}}</td>
@@ -34,9 +34,9 @@
 
     <table class="table">
         <tr ng-repeat="x in selectedLeague.lastFixtures">
-            <td class="text-right"><a ng-click="teamStat(x._links.homeTeam.href)">{{ x.homeTeamName}}</a></td>
+            <td class="text-right"><a ng-click="teamStat(x._links.homeTeam.href)" data-toggle="modal" href="#lastFive">{{ x.homeTeamName}}</a></td>
             <td>{{x.result.goalsHomeTeam + ' - ' + x.result.goalsAwayTeam}}</td>
-            <td class="text-left"><a ng-click="teamStat(x._links.awayTeam.href)">{{x.awayTeamName }}</a></td>
+            <td class="text-left"><a ng-click="teamStat(x._links.awayTeam.href)" data-toggle="modal" href="#lastFive">{{x.awayTeamName }}</a></td>
         </tr>
     </table>
     <h3>Следующий матч</h3>
